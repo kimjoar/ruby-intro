@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Erfaringer med testdrevet JavaScript</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <script src="http://cloud.github.com/downloads/gnab/remark/remark-0.3.6.min.js" type="text/javascript"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="http://cloud.github.com/downloads/kjbekkelund/remark-bekk/bekk-0.0.5.js" type="text/javascript"></script>
+    <link href="http://cloud.github.com/downloads/kjbekkelund/remark-bekk/bekk-0.0.5.css" type="text/css" rel="stylesheet">
+    <style type="text/css" media="screen">
+      #slideshow .slide .content.front-page h1 { width: 100%; }
+      .slide p { padding: 0; margin: 1.1em 0; }
+      .slide ul { padding: 0; margin: 1.1em 0; }
+      #slideshow .slide .content ul li { padding-left: 1.3em; }
+      #slideshow .slide .content.cols.two .col { width: 45%; margin-right: 10%;}
+      #slideshow .slide .content.cols .col:last-child { margin-right: 0; }
+      .slide img { max-width: 100%; }
+      .slide .subviews img { max-width: 80%; margin-left: 70px; }
+      #slideshow .slide .content.big-code pre code { font-size: 25px; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+
+.front-page
+
+# Webutvikling i Ruby
+
+## En kort introduksjon til programmeringsspråket Ruby
+
+Bedriftspresentasjon
+
+Kim Joar Bekkelund
+
+06/09/2012
+
+---
+
+.middle.center
+
+Språket du bruker former tankene og tankemåtene dine.
+
+---
+
+.middle.center
+
+# Alt er objekter
+
+---
+
+.middle.center
+
+Hva betyr egentlig det?
+
+---
+
+.big-code
+
+# Alt er objekter
+
+    .ruby
+    "test".class() #=> String
+    "test".length() #=> 4
+
+`#` brukes for kommentarer.
+
+`#=>` brukes for å vise resultatet av et funksjonskall
+
+---
+
+.big-code
+
+# Alt er objekter
+
+    .ruby
+    "test".class() #=> String
+    "test".length() #=> 4
+
+Tall:
+
+    .ruby
+    -1.abs() #=> 1
+
+---
+
+.big-code
+
+# Alt er objekter
+
+    .ruby
+    "test".class() #=> String
+    "test".length() #=> 4
+
+Tall:
+
+    .ruby
+    -1.abs() #=> 1
+
+Booleans:
+
+    .ruby
+    true.class() #=> TrueClass
+
+---
+
+.big-code
+
+# Alt er objekter
+
+    .ruby
+    "test".class() #=> String
+    "test".length() #=> 4
+
+Tall:
+
+    .ruby
+    -1.abs() #=> 1
+
+Booleans:
+
+    .ruby
+    true.class() #=> TrueClass
+
+Og `nil` (ofte kjent som `null` utenfor Ruby):
+
+    .ruby
+    v = nil
+    v.nil?() #=> true
+
+---
+
+.middle.center
+
+Ehm, var det en `?` der?
+
+---
+
+.middle.big-code
+
+&nbsp;
+
+    .ruby
+    v = nil
+    v.nil?() #=> true
+
+---
+
+.middle.center
+
+Vanlig med `?` for metoder som returnerer `true` eller `false`
+
+---
+
+.middle.center
+
+# Ruby er laget for å bli lest
+
+---
+
+.middle.center
+
+Så la oss like greit kvitte oss med `()` i metodekall!
+
+---
+
+.big-code
+
+# Trenger ikke paranteser
+
+    .ruby
+    "test".class #=> String
+    "test".length #=> 4
+
+    -1.abs #=> 1
+
+    true.class #=> TrueClass
+
+    v = nil
+    v.nil? #=> true
+
+---
+
+.big-code
+
+# Operatorer er metoder
+
+    .ruby
+    1 + 1 #=> true
+
+er det samme som
+
+    .ruby
+    1.+(1) #=> true
+
+Og:
+
+    .ruby
+    5 == 6 #=> false
+
+er det samme som
+
+    .ruby
+    5.==(6) #=> false
+
+---
+
+.middle.center
+
+Dette er utrolig kult og utrolig kraftig
+
+---
+
+.big-code
+
+# if
+
+Ingen paranteser eller `{}`, men med innrykk:
+
+    .ruby
+    if condition
+      # do something
+    elsif other_condition
+      # do something else
+    else
+      # do something other
+    end
+
+---
+
+.big-code
+
+# if
+
+Ingen paranteser eller `{}`, men med innrykk:
+
+    .ruby
+    if condition
+      # do something
+    elsif other_condition
+      # do something else
+    else
+      # do something other
+    end
+
+Postfix:
+
+    .ruby
+    x = 5 if condition
+
+    # for eksempel
+    x = 5 if navn == "Kim Joar"
+
+---
+
+.big-code
+
+# if
+
+    .ruby
+    x = 1 if navn != "Kim Joar"
+
+---
+
+.big-code
+
+# if
+
+    .ruby
+    x = 1 if navn != "Kim Joar"
+
+Men Ruby-kode skal leses:
+
+    x = 1 unless navn == "Kim Joar"
+
+---
+
+.big-code
+
+# if
+
+    .ruby
+    x = 1 if navn != "Kim Joar"
+
+Men Ruby-kode skal leses:
+
+    x = 1 unless navn == "Kim Joar"
+
+Også på kodeblokk:
+
+    .ruby
+    unless condition
+      # do something
+    end
+
+---
+
+.big-code
+
+# Array
+
+Hva gjør vi når vi skal ha et sett med elementer?
+
+    .ruby
+    liste = [1, 2, true, "testing"]
+    liste.length  #=> 4
+    liste.last    #=> "testing"
+
+---
+
+.big-code
+
+# Array, hash
+
+Hva gjør vi når vi skal ha et sett med elementer?
+
+    .ruby
+    liste = [1, 2, true, "testing"]
+    liste.length  #=> 4
+    liste.last    #=> "testing"
+
+Og når vi ønsker å slå opp på en verdi?
+
+    objekt = { "navn" => "Kim" }
+    objekt["navn"] #=> "Kim"
+    objekt.has_key? "navn" #=> true
+
+---
+
+.big-code
+
+# Array, hash og range
+
+Hva gjør vi når vi skal ha et sett med elementer?
+
+    .ruby
+    liste = [1, 2, true, "testing"]
+    liste.length  #=> 4
+    liste.last    #=> "testing"
+
+Og når vi ønsker å slå opp på en verdi?
+
+    objekt = { "navn" => "Kim" }
+    objekt["navn"] #=> "Kim"
+    objekt.has_key? "navn" #=> true
+
+Og hva med en liste med tall?
+
+    range = (1..5)
+    range.to_a #=> [1, 2, 3, 4, 5]
+    range.include? 2 #=> true
+
+---
+
+.middle.center
+
+Men la oss se litt på hashen igjen
+
+---
+
+.middle.big-code
+
+&nbsp;
+
+    .ruby
+    objekt = { "navn" => "Kim" }
+    objekt["navn"] #=> "Kim"
+    objekt.has_key? "navn" #=> true
+
+---
+
+.middle.center
+
+Det er to typer strenger i Ruby
+
+---
+
+.cols.two.big-code
+
+# Strenger
+
+<div class="col">
+  &nbsp;
+
+    .ruby
+    x = "foo"
+    y = "foo"
+
+    x == y #=> true
+    x.equal?(y) #=> false
+</div>
+
+---
+
+.cols.two.big-code
+
+# Strenger vs symboler
+
+<div class="col">
+  &nbsp;
+
+    .ruby
+    x = "foo"
+    y = "foo"
+
+    x == y #=> true
+    x.equal?(y) #=> false
+</div>
+
+<div class="col">
+  &nbsp;
+
+    .ruby
+    x = :foo
+    y = :foo
+
+    x == y #=> true
+    x.equal?(y) #=> true
+</div>
+
+---
+
+.cols.two.big-code
+
+# Strenger vs symboler
+
+<div class="col">
+  &nbsp;
+
+    .ruby
+    x = "foo"
+    y = "foo"
+
+    x == y #=> true
+    x.equal?(y) #=> false
+
+  <div class="center">Mutabel</div>
+</div>
+
+<div class="col">
+  &nbsp;
+
+    .ruby
+    x = :foo
+    y = :foo
+
+    x == y #=> true
+    x.equal?(y) #=> true
+
+  <div class="center">Immutabel</div>
+</div>
+
+---
+
+.middle.big-code
+
+&nbsp;
+
+    .ruby
+    objekt = { :navn => "Kim" }
+    objekt[:navn] #=> "Kim"
+    objekt.has_key? :navn #=> true
+
+---
+
+.big-code
+
+# Iterering
+
+La se på arrayen igjen:
+
+    .ruby
+    liste = [1, 2, true, "testing"]
+
+Skrive ut alle elementer:
+
+    liste.each { |value|
+      puts value
+    }
+    # 1
+    # 2
+    # true
+    # "testing"
+
+---
+
+.big-code
+
+# Iterering
+
+La se på arrayen igjen:
+
+    .ruby
+    liste = [1, 2, true, "testing"]
+
+Skrive ut alle elementer:
+
+    liste.each do |value|
+      puts value
+    end
+    # 1
+    # 2
+    # true
+    # "testing"
+
+---
+
+.big-code
+
+# Jobbe med arrays
+
+    .ruby
+    liste = [1,2,3,4,5,6,7]
+
+Hente alle som matcher:
+
+    .ruby
+    liste.select do |value|
+      value % 3 == 0
+    end
+    #=> [3,6]
+
+Summere:
+
+    liste.reduce(0) do |sum, n|
+      sum + n
+    end
+    #=> 28
+
+---
+
+.middle.big-code
+
+Husk:
+
+    .ruby
+    1 + 1 #=> 2
+    1.+(1) #=> 2
+
+---
+
+.big-code
+
+# Utnytte at operatorer er metoder
+
+La oss endre
+
+    .ruby
+    liste.reduce(0) do |sum, n|
+      sum + n
+    end
+    #=> 28
+
+til
+
+    .ruby
+    liste.reduce(:+) #=> 28
+
+Altså: kall metoden `+` for hvert element i lista
+
+---
+
+.middle.center
+
+# Metoder
+
+---
+
+.big-code
+
+# Lage egen metode
+
+    .ruby
+    def hello_world
+      puts 'Hello World!'
+    end
+
+    hello_world
+    #=> Hello World!
+
+---
+
+.big-code
+
+# Metodesignatur
+
+    .ruby
+    def weirdo(x)
+      if x == 5
+        return "Bingo"
+      else
+        return 42
+      end
+    end
+
+    puts weirdo(5) #=> "Bingo"
+    puts weirdo("Ultimate?") #=> 42
+
+---
+
+.middle
+
+Ruby liker ikke støy.
+
+---
+
+.middle
+
+Ruby liker ikke støy. La oss fjerne `return`
+
+---
+
+.big-code
+
+# Uten return
+
+    .ruby
+    def weirdo(x)
+      if x == 5
+        "Bingo"
+      else
+        42
+      end
+    end
+
+    puts weirdo(5) #=> "Bingo"
+    puts weirdo("Ultimate?") #=> 42
+
+---
+
+.big-code
+
+# Uten return
+
+    .ruby
+    def weirdo(x)
+      if x == 5
+        "Bingo"
+      else
+        42
+      end
+    end
+
+    puts weirdo(5) #=> "Bingo"
+    puts weirdo("Ultimate?") #=> 42
+
+Siste linje returneres!
+
+---
+
+.big-code
+
+# Lage en klasse
+
+    .ruby
+    class MyClass
+
+
+
+    end
+
+    # lager en instans
+    o = MyClass.new
+
+
+    &nbsp;
+
+---
+
+.big-code
+
+# Lage en klasse
+
+    .ruby
+    class MyClass
+      def hello(name)
+        "Hi, #{name}"
+      end
+    end
+
+    # lager en instans
+    o = MyClass.new
+
+
+    &nbsp;
+
+---
+
+.big-code
+
+# Lage en klasse
+
+    .ruby
+    class MyClass
+      def hello(name)
+        "Hi, #{name}"
+      end
+    end
+
+    # lager en instans
+    o = MyClass.new
+
+    # og kaller metoden
+    o.hello("Bob") #=> Hi, Bob
+
+---
+
+.big-code
+
+# Klassemetode
+
+    .ruby
+    class MyClass
+      def self.hello(name)
+        "Hi, #{name}"
+      end
+    end
+
+    MyClass.hello("Bob") #=> Hi, Bob
+
+---
+
+.big-code
+
+# Variabler
+
+    .ruby
+    class User
+      def name=(name) # istedenfor setName
+        @name = name
+      end
+
+      def name # istedenfor getName
+        @name
+      end
+    end
+
+    user = User.new
+    user.name = "Kim"
+    puts user.name #=> Kim
+
+`name` er lokal variabel, `@name` er en instansvariabel
+
+---
+
+.middle.center
+
+gettere og settere er kjipt å skrive
+
+---
+
+.big-code
+
+# Slippe gettere og settere
+
+    .ruby
+    class User
+      def name=(name) # istedenfor setName
+        @name = name
+      end
+
+      def name # istedenfor getName
+        @name
+      end
+    end
+
+Bedre:
+
+    .ruby
+    class User
+      attr_accessor :name
+    end
+
+---
+
+.middle.center
+
+Og så til noe veldig uvanlig
+
+---
+
+.big-code
+
+# Endre Rubys egne objekter
+
+    .ruby
+    class String
+      def exclamate
+        "#{self}!"
+      end
+    end
+
+    puts "Rop".exclamate
+    #=> Rop!
+
+Vi åpner opp `String` og legger til en metode
+
+---
+
+.middle.center
+
+# irb
+
+---
+
+.middle.center
+
+# La oss lage en webapp
+
+---
+
+.middle.center
+
+# Spørsmål?
+
+    </textarea>
+    <div id="slideshow"></div>
+  </body>
+</html>
