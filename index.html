@@ -143,11 +143,31 @@ Ehm, var det en `?` der?
     v = nil
     v.nil?() #=> true
 
+    name = "Kim"
+    empty.empty?() #=> false
+
+    num = 1
+    num.integer?() #=> true
+
+&nbsp;
+
 ---
 
-.middle.center
+.middle.big-code
 
-Vanlig med `?` for metoder som returnerer `true` eller `false`
+&nbsp;
+
+    .ruby
+    v = nil
+    v.nil?() #=> true
+
+    name = "Kim"
+    empty.empty?() #=> false
+
+    num = 1
+    num.integer?() #=> true
+
+Vanlig med `?` i metoder som returnerer `true` eller `false`
 
 ---
 
@@ -163,20 +183,35 @@ Så la oss like greit kvitte oss med `()` i metodekall!
 
 ---
 
-.big-code
+.middle.big-code
 
-# Trenger ikke paranteser
+&nbsp;
 
     .ruby
-    "test".class #=> String
-    "test".length #=> 4
+    "test".class      #=> String
+    "test".length     #=> 4
+    "test".capitalize #=> Test
 
-    -1.abs #=> 1
+    -1.abs    #=> 1
+    1.2.floor #=> 1
 
     true.class #=> TrueClass
 
+---
+
+.middle.big-code
+
+Nå ser metoder med spørsmålstegn bedre ut:
+
+    .ruby
     v = nil
     v.nil? #=> true
+
+    name = "Kim"
+    empty.empty? #=> false
+
+    num = 1
+    num.integer? #=> true
 
 ---
 
@@ -200,6 +235,7 @@ er det samme som
 
     .ruby
     1.+(1) #=> true
+
 ---
 
 .big-code
@@ -791,6 +827,31 @@ Bedre:
     class User
       attr_accessor :name
     end
+
+---
+
+.big-code
+
+# Endre +
+
+    .ruby
+    class Car
+      attr_accessor :price
+
+      # Kalles når vi kaller `new`
+      def initialize(price)
+        @price = price
+      end
+
+      def +(other)
+        @price + other.price
+      end
+    end
+
+    toyota = Car.new(300_000)
+    bmw = Car.new(1_000_000)
+
+    toyota + bmw #=> 1300000
 
 ---
 
