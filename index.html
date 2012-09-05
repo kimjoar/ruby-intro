@@ -73,7 +73,7 @@ Hva betyr egentlig det?
 
 `#` brukes for kommentarer.
 
-`#=>` brukes for å vise resultatet av et funksjonskall
+`#=>` er konvensjon for å vise resultatet av et funksjonskall
 
 ---
 
@@ -157,26 +157,6 @@ Ehm, var det en `?` der?
 
     num = 1
     num.integer?() #=> true
-
-&nbsp;
-
----
-
-.middle.big-code
-
-&nbsp;
-
-    .ruby
-    v = nil
-    v.nil?() #=> true
-
-    name = "Kim"
-    empty.empty?() #=> false
-
-    num = 1
-    num.integer?() #=> true
-
-Vanlig med `?` i metoder som returnerer `true` eller `false`
 
 ---
 
@@ -582,47 +562,40 @@ Hente alle som matcher:
 
     .ruby
     liste.select do |value|
-      return value % 3 == 0
+      value % 3 == 0
     end
     #=> [3,6]
 
 Summere:
 
-    liste.reduce(0) do |sum, n|
-      return sum + n
+    liste.map do |value|
+      value * 2
     end
-    #=> 28
-
----
-
-.middle.big-code
-
-Husk:
-
-    .ruby
-    1 + 1 #=> 2
-    1.+(1) #=> 2
+    #=> [2, 4, 6, 8, 10, 12, 14]
 
 ---
 
 .big-code
 
-# Utnytte at operatorer er metoder
-
-La oss endre
+# Kult triks
 
     .ruby
-    liste.reduce(0) do |sum, n|
-      return sum + n
+    strings = ["kim", "bekk", "bergen"]
+
+Istedenfor
+
+    .ruby
+    strings.map do |string|
+      string.upcase
     end
-    #=> 28
+    #=> ["KIM", "BEKK", "BERGEN"]
 
 til
 
     .ruby
-    liste.reduce(:+) #=> 28
+    strings.map(&:upcase) #=> ["KIM", "BEKK", "BERGEN"]
 
-Altså: kall metoden `+` for hvert element i lista
+Altså: kall metoden `upcase` for hvert element i lista
 
 ---
 
@@ -805,7 +778,7 @@ Siste linje returneres!
     user.name = "Kim"
     puts user.name #=> Kim
 
-`name` er lokal variabel, `@name` er en instansvariabel
+`new_name` er lokal variabel, `@name` er en instansvariabel
 
 ---
 
@@ -836,6 +809,56 @@ Bedre:
     class User
       attr_accessor :name
     end
+
+---
+
+.big-code
+
+# Endre +
+
+    .ruby
+    class Car
+      attr_accessor :price
+
+      # Kalles når vi kaller `new`
+      def initialize(price)
+        @price = price
+      end
+
+
+
+
+    end
+
+
+
+
+    &nbsp;
+
+---
+
+.big-code
+
+# Endre +
+
+    .ruby
+    class Car
+      attr_accessor :price
+
+      # Kalles når vi kaller `new`
+      def initialize(price)
+        @price = price
+      end
+
+      def +(other)
+        @price + other.price
+      end
+    end
+
+
+
+
+    &nbsp;
 
 ---
 
@@ -930,7 +953,7 @@ Vi åpner opp `String` og legger til en metode
 
 &nbsp;
 
-Sinatra - Rammeverk
+Sinatra - Superenkelt rammeverk
 
 Git - Versjonskontroll
 
@@ -938,17 +961,19 @@ Heroku - Cloudløsning
 
 ---
 
+.big-code
+
 # Tre filer
 
 Heroku trenger to filer.
 
-`config.ru`:
+`config.ru`, som starter applikasjonen:
 
     .ruby
-    require './intro'
-    run Sinatra::Application
+    require './intro.rb'       # hent applikasjonen vår
+    run Sinatra::Application   # ... og start den
 
-`Gemfile`:
+`Gemfile`, som inneholder avhengighetene våre:
 
     .ruby
     source :rubygems
