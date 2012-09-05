@@ -16,6 +16,9 @@
       #slideshow .slide .content.cols .col:last-child { margin-right: 0; }
       .slide img { max-width: 100%; }
       .slide .subviews img { max-width: 80%; margin-left: 70px; }
+      .slide .ruby img { width: 50%; }
+      .slide .heroku { background-color: #1B1B24; }
+      .slide .heroku p { color: #fff; }
       #slideshow .slide .content.big-code pre code { font-size: 25px; }
     </style>
   </head>
@@ -39,6 +42,12 @@ Kim Joar Bekkelund
 .middle.center
 
 Språket du bruker former tankene og tankemåtene dine.
+
+---
+
+.middle.center.ruby
+
+![](ruby.png)
 
 ---
 
@@ -573,14 +582,14 @@ Hente alle som matcher:
 
     .ruby
     liste.select do |value|
-      value % 3 == 0
+      return value % 3 == 0
     end
     #=> [3,6]
 
 Summere:
 
     liste.reduce(0) do |sum, n|
-      sum + n
+      return sum + n
     end
     #=> 28
 
@@ -604,7 +613,7 @@ La oss endre
 
     .ruby
     liste.reduce(0) do |sum, n|
-      sum + n
+      return sum + n
     end
     #=> 28
 
@@ -879,6 +888,36 @@ Vi åpner opp `String` og legger til en metode
 
 ---
 
+.big-code
+
+# Men hva om jeg gjør dette?
+
+    .ruby
+    class Fixnum
+      def +(i)
+        self - i
+      end
+    end
+
+---
+
+.big-code
+
+# Men hva om jeg gjør dette?
+
+    .ruby
+    class Fixnum
+      def +(i)
+        self - i
+      end
+    end
+
+&nbsp;
+
+.center[![](one-plus-one.png)]
+
+---
+
 .middle.center
 
 # irb
@@ -889,6 +928,42 @@ Vi åpner opp `String` og legger til en metode
 
 # La oss lage en webapp
 
+&nbsp;
+
+Sinatra - Rammeverk
+
+Git - Versjonskontroll
+
+Heroku - Cloudløsning
+
+---
+
+# Tre filer
+
+Heroku trenger to filer.
+
+`config.ru`:
+
+    .ruby
+    require './intro'
+    run Sinatra::Application
+
+`Gemfile`:
+
+    .ruby
+    source :rubygems
+    gem 'sinatra'
+
+---
+
+.heroku.middle.center
+
+![](toolbelt.png)
+
+&nbsp;
+
+toolbelt.heroku.com
+
 ---
 
 .middle.center
@@ -896,6 +971,6 @@ Vi åpner opp `String` og legger til en metode
 # Spørsmål?
 
     </textarea>
-    <div id="slideshow"></div>
+    <div id="slideshow" class="white"></div>
   </body>
 </html>
